@@ -89,3 +89,10 @@ def test_row_count(data):
 
 def test_price_range(data, min_price, max_price):
     assert data['price'].between(min_price, max_price).all()
+
+def test_proper_boundaries(data):
+    """
+    Test that all listings are within NYC boundaries
+    """
+    idx = data['longitude'].between(-74.25, -73.50) & data['latitude'].between(40.5, 41.2)
+    assert idx.all()
